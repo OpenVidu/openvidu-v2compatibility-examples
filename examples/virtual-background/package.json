@@ -1,0 +1,12 @@
+{
+  "name": "openvidu-basic-node",
+  "version": "2.32.1",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "2.2.2",
+    "cors": "2.8.6",
+    "dotenv": "17.2.4",
+    "express": "5.2.1",
+    "openvidu-node-client-v2compatibility": "3.5.0"
+  }
+}
