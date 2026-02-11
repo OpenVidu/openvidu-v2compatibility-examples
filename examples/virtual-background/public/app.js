@@ -26,15 +26,21 @@ function joinSession() {
   session.on("streamCreated", event => {
     // Subscribe to the Stream to receive it. HTML video will be appended to element with 'video-container' id
     var subscriber = session.subscribe(event.stream, "video-container");
+    var isPlaying = false;
 
     // When the HTML video has been appended to DOM...
     subscriber.on("videoElementCreated", event => {
       // Add a new <p> element for the user's nickname just below its video
       appendUserData(event.element, subscriber);
+      // If stream was already playing before the element was created, remove spinner now
+      if (isPlaying) {
+        $("#spinner-" + subscriber.stream.connection.connectionId).remove();
+      }
     });
 
     // When the video starts playing remove the spinner
     subscriber.on("streamPlaying", event => {
+      isPlaying = true;
       $("#spinner-" + subscriber.stream.connection.connectionId).remove();
     });
   });
